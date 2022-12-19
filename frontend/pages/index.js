@@ -5,7 +5,7 @@ import { authService } from '../src/services/auth/authService'
 export default function HomeScreen() {
   const router = useRouter()
   const [values, setValues] = React.useState({
-    'user': 'tester',
+    'user': 'peas',
     'password': 'safepassword',
   })
 
@@ -58,6 +58,10 @@ export default function HomeScreen() {
             Entrar
           </button>
         </div>
+        <p>
+          <a href="/auth-page-ssr">auth-page-ssr</a>
+          <a href="/auth-page-static">auth-page-static</a>
+        </p>
       </form>
     </div>
   )

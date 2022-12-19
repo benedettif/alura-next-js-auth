@@ -15,7 +15,20 @@ export const authService = {
         const body = response.body
 
         tokenService.save(body.data.access_token)
-        console.log(body)
+        
+        return body
+      })
+      .then(async ({ data }) => {
+        const { refresh_token } = data
+
+        console.log(refresh_token);
+
+        const response = await HttpClient('/api/refresh', {
+          method: 'POST',
+          body: {
+            refresh_token
+          }
+        })
       })
   },
   async getSession(context = null) {
@@ -25,7 +38,9 @@ export const authService = {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
-      }
+      },
+      context,
+      refresh: true,
     })
       .then((response) => {
         if (!response.ok) {
